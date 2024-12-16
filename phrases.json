@@ -1,0 +1,24 @@
+{
+    "phrases": [
+        {
+            "english": "Hello, how are you?",
+            "french": "Bonjour, comment ça va?"
+        },
+        {
+            "english": "I would like a coffee, please.",
+            "french": "Je voudrais un café, s'il vous plaît."
+        },
+        {
+            "english": "Where is the train station?",
+            "french": "Où est la gare?"
+        },
+        {
+            "english": "Thank you very much.",
+            "french": "Merci beaucoup."
+        },
+        {
+            "english": "Goodbye and see you soon!",
+            "french": "Au revoir et à bientôt!"
+        }
+    ]
+}
