@@ -5,6 +5,7 @@ fetch('phrases.json')
         const phraseDisplay = document.getElementById('phraseDisplay');
 
         let index = 0;
+        let isPlaying = false;
 
         function playPhrase() {
             if (index >= data.phrases.length) {
@@ -26,11 +27,27 @@ fetch('phrases.json')
                 speechSynthesis.speak(frenchUtterance);
             };
 
-            speechSynthesis.speak(englishUtterance);
+            frenchUtterance.onend = () => {
+                if (isPlaying) {
+                    index++;
+                    playPhrase();
+                }
+            };
 
-            index++;
+            speechSynthesis.speak(englishUtterance);
         }
 
-        playButton.addEventListener('click', playPhrase);
+        playButton.addEventListener('click', () => {
+            if (!isPlaying) {
+                isPlaying = true;
+                playPhrase();
+                playButton.textContent = "Stop";
+            } else {
+                isPlaying = false;
+                speechSynthesis.cancel();
+                playButton.textContent = "Play";
+                phraseDisplay.textContent = "Playback stopped.";
+            }
+        });
     })
     .catch(error => console.error('Error loading phrases:', error));
