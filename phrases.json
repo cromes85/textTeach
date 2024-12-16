@@ -1,24 +1,29 @@
 {
     "phrases": [
-        {
-            "english": "Hello, how are you?",
-            "french": "Bonjour, comment ça va?"
-        },
-        {
-            "english": "I would like a coffee, please.",
-            "french": "Je voudrais un café, s'il vous plaît."
-        },
-        {
-            "english": "Where is the train station?",
-            "french": "Où est la gare?"
-        },
-        {
-            "english": "Thank you very much.",
-            "french": "Merci beaucoup."
-        },
-        {
-            "english": "Goodbye and see you soon!",
-            "french": "Au revoir et à bientôt!"
-        }
+        { "english": "Hello, how are you?", "french": "Bonjour, comment ça va ?" },
+        { "english": "I would like a coffee, please.", "french": "Je voudrais un café, s'il vous plaît." },
+        { "english": "Where is the train station?", "french": "Où est la gare ?" },
+        { "english": "Thank you very much.", "french": "Merci beaucoup." },
+        { "english": "Goodbye and see you soon!", "french": "Au revoir et à bientôt !" },
+        { "english": "Can you help me, please?", "french": "Pouvez-vous m'aider, s'il vous plaît ?" },
+        { "english": "I am looking for a hotel.", "french": "Je cherche un hôtel." },
+        { "english": "What time is it?", "french": "Quelle heure est-il ?" },
+        { "english": "How much does it cost?", "french": "Combien ça coûte ?" },
+        { "english": "Where is the nearest hospital?", "french": "Où est l'hôpital le plus proche ?" },
+        { "english": "I am learning French.", "french": "J'apprends le français." },
+        { "english": "Do you speak English?", "french": "Parlez-vous anglais ?" },
+        { "english": "I like to read books.", "french": "J'aime lire des livres." },
+        { "english": "Can I have the menu, please?", "french": "Puis-je avoir le menu, s'il vous plaît ?" },
+        { "english": "I need a doctor.", "french": "J'ai besoin d'un médecin." },
+        { "english": "What is your favorite color?", "french": "Quelle est votre couleur préférée ?" },
+        { "english": "The weather is nice today.", "french": "Il fait beau aujourd'hui." },
+        { "english": "Where can I find a pharmacy?", "french": "Où puis-je trouver une pharmacie ?" },
+        { "english": "I am going to the airport.", "french": "Je vais à l'aéroport." },
+        { "english": "Can you show me the way?", "french": "Pouvez-vous m'indiquer le chemin ?" },
+        { "english": "I love traveling.", "french": "J'adore voyager." },
+        { "english": "Do you have any recommendations?", "french": "Avez-vous des recommandations ?" },
+        { "english": "Where can I take a taxi?", "french": "Où puis-je prendre un taxi ?" },
+        { "english": "Is there a supermarket nearby?", "french": "Y a-t-il un supermarché à proximité ?" },
+        { "english": "I am a software developer.", "french": "Je suis développeur de logiciels." }
     ]
 }
