@@ -1,4 +1,4 @@
-fetch('phrases.json')
+fetch('phrases_and_words.json')
     .then(response => response.json())
     .then(data => {
         const playButton = document.getElementById('playButton');
@@ -13,27 +13,26 @@ fetch('phrases.json')
             }
         }
 
-        function playPhrases(phrases) {
+        function playContent(content) {
             let index = 0;
-            shuffleArray(phrases); // Shuffle the array to ensure random order
-            let speedModifiers = [1, 0.75, 1, 0.5]; // Adjusted speeds for more natural playback
+            shuffleArray(content); // Shuffle the array for random order
+            let speedModifiers = [1, 0.75, 1, 0.5]; // Normal and slower speeds
             let speedIndex = 0;
 
-            function playNextPhrase() {
+            function playNext() {
                 if (!isPlaying) {
                     phraseDisplay.textContent = "Playback stopped.";
                     return;
                 }
 
-                const phrase = phrases[index];
-                const direction = Math.random() > 0.5 ? 'english-to-french' : 'french-to-english';
+                const item = content[index];
                 const speed = speedModifiers[speedIndex % speedModifiers.length];
                 speedIndex++;
 
-                if (direction === 'english-to-french') {
-                    phraseDisplay.textContent = `English: ${phrase.english} | French: ${phrase.french}`;
-                    const englishUtterance = new SpeechSynthesisUtterance(phrase.english);
-                    const frenchUtterance = new SpeechSynthesisUtterance(phrase.french);
+                if (item.type === 'phrase') {
+                    phraseDisplay.textContent = `Phrase: ${item.english} | ${item.french}`;
+                    const englishUtterance = new SpeechSynthesisUtterance(item.english);
+                    const frenchUtterance = new SpeechSynthesisUtterance(item.french);
 
                     englishUtterance.lang = 'en-US';
                     englishUtterance.rate = speed;
@@ -43,40 +42,40 @@ fetch('phrases.json')
 
                     englishUtterance.onend = () => speechSynthesis.speak(frenchUtterance);
                     frenchUtterance.onend = () => {
-                        index = (index + 1) % phrases.length;
-                        playNextPhrase();
+                        index = (index + 1) % content.length;
+                        playNext();
                     };
 
                     speechSynthesis.speak(englishUtterance);
-                } else {
-                    phraseDisplay.textContent = `French: ${phrase.french} | English: ${phrase.english}`;
-                    const frenchUtterance = new SpeechSynthesisUtterance(phrase.french);
-                    const englishUtterance = new SpeechSynthesisUtterance(phrase.english);
-
-                    frenchUtterance.lang = 'fr-FR';
-                    frenchUtterance.rate = speed;
+                } else if (item.type === 'word') {
+                    phraseDisplay.textContent = `Word: ${item.english} | ${item.french}`;
+                    const englishUtterance = new SpeechSynthesisUtterance(item.english);
+                    const frenchUtterance = new SpeechSynthesisUtterance(item.french);
 
                     englishUtterance.lang = 'en-US';
                     englishUtterance.rate = speed;
 
-                    frenchUtterance.onend = () => speechSynthesis.speak(englishUtterance);
-                    englishUtterance.onend = () => {
-                        index = (index + 1) % phrases.length;
-                        playNextPhrase();
+                    frenchUtterance.lang = 'fr-FR';
+                    frenchUtterance.rate = speed;
+
+                    englishUtterance.onend = () => speechSynthesis.speak(frenchUtterance);
+                    frenchUtterance.onend = () => {
+                        index = (index + 1) % content.length;
+                        playNext();
                     };
 
-                    speechSynthesis.speak(frenchUtterance);
+                    speechSynthesis.speak(englishUtterance);
                 }
             }
 
-            playNextPhrase();
+            playNext();
         }
 
         playButton.addEventListener('click', () => {
             if (!isPlaying) {
                 isPlaying = true;
                 playButton.textContent = "Stop";
-                playPhrases(data.phrases);
+                playContent(data.content);
             } else {
                 isPlaying = false;
                 speechSynthesis.cancel();
@@ -84,4 +83,4 @@ fetch('phrases.json')
             }
         });
     })
-    .catch(error => console.error('Error loading phrases:', error));
+    .catch(error => console.error('Error loading content:', error));
