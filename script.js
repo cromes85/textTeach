@@ -29,8 +29,10 @@ fetch('phrases_and_words.json')
                 const speed = speedModifiers[speedIndex % speedModifiers.length];
                 speedIndex++;
 
-                if (item.type === 'phrase') {
-                    phraseDisplay.textContent = `Phrase: ${item.english} | ${item.french}`;
+                const direction = Math.random() > 0.5 ? 'english-to-french' : 'french-to-english';
+
+                if (direction === 'english-to-french') {
+                    phraseDisplay.textContent = `English: ${item.english} | French: ${item.french}`;
                     const englishUtterance = new SpeechSynthesisUtterance(item.english);
                     const frenchUtterance = new SpeechSynthesisUtterance(item.french);
 
@@ -47,24 +49,24 @@ fetch('phrases_and_words.json')
                     };
 
                     speechSynthesis.speak(englishUtterance);
-                } else if (item.type === 'word') {
-                    phraseDisplay.textContent = `Word: ${item.english} | ${item.french}`;
-                    const englishUtterance = new SpeechSynthesisUtterance(item.english);
+                } else {
+                    phraseDisplay.textContent = `French: ${item.french} | English: ${item.english}`;
                     const frenchUtterance = new SpeechSynthesisUtterance(item.french);
-
-                    englishUtterance.lang = 'en-US';
-                    englishUtterance.rate = speed;
+                    const englishUtterance = new SpeechSynthesisUtterance(item.english);
 
                     frenchUtterance.lang = 'fr-FR';
                     frenchUtterance.rate = speed;
 
-                    englishUtterance.onend = () => speechSynthesis.speak(frenchUtterance);
-                    frenchUtterance.onend = () => {
+                    englishUtterance.lang = 'en-US';
+                    englishUtterance.rate = speed;
+
+                    frenchUtterance.onend = () => speechSynthesis.speak(englishUtterance);
+                    englishUtterance.onend = () => {
                         index = (index + 1) % content.length;
                         playNext();
                     };
 
-                    speechSynthesis.speak(englishUtterance);
+                    speechSynthesis.speak(frenchUtterance);
                 }
             }
 
