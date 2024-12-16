@@ -4,8 +4,8 @@ body {
     font-family: 'Comic Sans MS', cursive, sans-serif;
     font-size: 20pt;
     color: white;
-    background: linear-gradient(to bottom, #000000, #1a1a2e);
-    background-image: url('https://source.unsplash.com/1600x900/?night-sky,stars');
+    background: linear-gradient(to bottom, #000000, #0d0d1a);
+    background-image: url('https://source.unsplash.com/1600x900/?stars,dark-night');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -22,7 +22,7 @@ h1, p {
 }
 
 button {
-    background-color: #ff6347; /* Tomato color for contrast */
+    background-color: #4b0082; /* Indigo color for a soothing tone */
     color: white;
     border: none;
     border-radius: 10px;
@@ -35,7 +35,7 @@ button {
 }
 
 button:hover {
-    background-color: #e5533a;
+    background-color: #2e0854;
     transform: scale(1.05);
 }
 
