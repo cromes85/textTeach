@@ -16,6 +16,8 @@ fetch('phrases.json')
         function playPhrases(phrases) {
             let index = 0;
             shuffleArray(phrases); // Shuffle the array to ensure random order
+            let speedModifiers = [1, 0.5, 1, 0.1667]; // Normal, half speed, normal, one-sixth speed
+            let speedIndex = 0;
 
             function playNextPhrase() {
                 if (!isPlaying) {
@@ -25,6 +27,8 @@ fetch('phrases.json')
 
                 const phrase = phrases[index];
                 const direction = Math.random() > 0.5 ? 'english-to-french' : 'french-to-english';
+                const speed = speedModifiers[speedIndex % speedModifiers.length];
+                speedIndex++;
 
                 if (direction === 'english-to-french') {
                     phraseDisplay.textContent = `English: ${phrase.english} | French: ${phrase.french}`;
@@ -32,7 +36,10 @@ fetch('phrases.json')
                     const frenchUtterance = new SpeechSynthesisUtterance(phrase.french);
 
                     englishUtterance.lang = 'en-US';
+                    englishUtterance.rate = speed;
+
                     frenchUtterance.lang = 'fr-FR';
+                    frenchUtterance.rate = speed;
 
                     englishUtterance.onend = () => speechSynthesis.speak(frenchUtterance);
                     frenchUtterance.onend = () => {
@@ -47,7 +54,10 @@ fetch('phrases.json')
                     const englishUtterance = new SpeechSynthesisUtterance(phrase.english);
 
                     frenchUtterance.lang = 'fr-FR';
+                    frenchUtterance.rate = speed;
+
                     englishUtterance.lang = 'en-US';
+                    englishUtterance.rate = speed;
 
                     frenchUtterance.onend = () => speechSynthesis.speak(englishUtterance);
                     englishUtterance.onend = () => {
