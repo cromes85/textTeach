@@ -16,7 +16,7 @@ fetch('phrases_and_words.json')
         function playContent(content) {
             let index = 0;
             shuffleArray(content); // Shuffle the array for random order
-            let speedModifiers = [1, 0.75, 1, 0.5]; // Normal and slower speeds
+            let speedModifiers = [1, 0.85, 1, 0.7]; // Normal and slightly slower speeds
             let speedIndex = 0;
 
             function playNext() {
